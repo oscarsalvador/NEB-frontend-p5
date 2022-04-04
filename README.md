@@ -1,14 +1,9 @@
-## Notas
-1. Aunque hay un boton "siquienge" para añadir nuevos resultados a la pagina, tambien he implementado scroll infinito. Para verlo en uso es necesario empequeñecer la pagina o hacer varias cargas manuales.
-2. Hay busqueda automatica a la vez que se escribe, pero no he sabido solucionar la condicion de carrera. El tamaño de la peticion a la api y su velocidad de respuesta lo mitigan, no he llegado a tener un problema.
-2. El selector al lado de la caja de busqueda tiene tres de las categorías que ofrece la api, los detalles de las entradas de cada una una muestran contenidos distintos.
-3. Se pueden desplegar y esconder los detalles de cada entrada haciendo y volviendo a hacer click.
-
-## Funcionamiento
-No he querido instalar los paquetes directamente sobre mi sistema, he aprovechado a usar docker. El yml está incluido, de sus servicios solo dos son necesarios
-
-### `docker-compose up install`
-Para montar node_modules, que no incluyo en el repo
-
-### `docker-compose up start`
-Para lanzar el servidor
+pagina que se ajuste, con flex, cuadrados, grid.
+lista de todas las paginas abajo, con puntitos, y flechas para siguiente 
+	< 1 ... 15 16 17 ... 46 >
+			o
+	Tambien deja scroll infinito, me renta reciclarlo
+y anterior. Si no hay sig o ant, no mostrar la flecha
+Al pinchar en un personaje, que abra un modal, los popup de react. Con
+detalles sobre el personaje y una x para cerrar
+de broma, ha pedido que las paginas abajo sean 3d y se muevan
