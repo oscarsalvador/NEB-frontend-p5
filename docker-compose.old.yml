@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  install:
+    image: node:latest
+    user: 1000:1000
+    working_dir: /node
+    volumes:
+      - .:/node
+    entrypoint: /usr/local/bin/npm install
+    # docker-compose up install
+    # docker-compose run --rm install
+  start:
+    image: node:latest
+    user: 1000:1000
+    ports: 
+    - "80:3000"
+    working_dir: /node
+    volumes:
+      - .:/node
+    entrypoint: /usr/local/bin/npm start
+    # docker-compose up start
+    # docker-compose run --rm --service-ports start
+  create:
+    image: node:latest
+    user: 1000:1000
+    working_dir: /node
+    volumes:
+      - .:/node
+    entrypoint: /usr/local/bin/npx create-react-app app --template typescript
+    # docker-compose up create
+    # docker-compose run --rm create
+    # docker-compose run --rm create bash
+  build:
+    image: node:latest
+    user: 1000:1000
+    working_dir: /node
+    volumes:
+      - .:/node
+    entrypoint: /usr/local/bin/npm run build
+    # docker-compose up build
+    # docker-compose run --rm build
