@@ -17,11 +17,26 @@ const Cabecera = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	.c{
+		justify-content: center;
+	}
 `;
+const PageSpan = styled.span`
+	display: flex;
+	justify-content: space-around;
+	width: 100px;
+`;
+
+const PageDiv = styled.div`
+	display: inline-block;
+	width: 100px;
+`;
+// const TextoCabecera = styled.span<{ver: boolean}>`
+// 	opacity: ${(props) => props.ver? "1" : "0"};
 const TextoCabecera = styled.span`
 	padding: 5px;
 	&:hover{
-		font-weight: bold;
+		font-weight: 800;
 	}
 `;
 const ContieneChars = styled.div`
@@ -90,6 +105,9 @@ const Contenedor: FC = () => {
 			console.log("manejando evento")
 			if(scrollTop + clientHeight >= scrollHeight -5){
 				console.log("close to bottom")
+				handleLoadMore();
+				setCurrPag(currPag +1)
+				setAddPag(addPag +1)
 			}
 		});
 	}, 
@@ -130,8 +148,22 @@ const Contenedor: FC = () => {
 			},
 			updateQuery: (prev, {fetchMoreResult})  =>{
 				if(!fetchMoreResult) return prev;
+				console.log("AAAAAAAAAAAA")
+				console.log(prev)
+				// return {
+				// 	characters: {
+				// 		results: [... prev.characters.results, ...fetchMoreResult.characters.results]
+				// 	}
+				// }
 				return Object.assign({}, prev, {
-					characters: [...prev.characters.results, ...fetchMoreResult.characters.results]
+					characters: {
+						info: {
+							...prev.characters.info
+						},
+						results: 
+							[...prev.characters.results, ...fetchMoreResult.characters.results]
+						
+					}
 				})
 			}
 		})
@@ -205,32 +237,67 @@ const Contenedor: FC = () => {
 		</Modal>
 
 		<Cabecera>
-			{/* <Rotador> */}
+			<Rotador>
 				{currPag > 1? 
-					<span>
+					<PageDiv>
 						<TextoCabecera onClick={() => {
 							setCurrPag(currPag -1)
 							setCharacs([]);
 						}}>Prev</TextoCabecera>
+
 						<TextoCabecera onClick={() =>setCurrPag(1)}>1</TextoCabecera>
-					</span>: null
+
+						{currPag > 2? "..." : ""}
+					</PageDiv>: null
 				}
 
-				{currPag > 2? "..." : ""}
 				<TextoCabecera> ({currPag}) </TextoCabecera>
-				{currPag < data.characters.info.pages -1? "..." : ""}
 
 				{currPag < data.characters.info.pages? 
-					<span>
+					<PageDiv>
+						{currPag < data.characters.info.pages -1? "..." : ""}
+
 						<TextoCabecera onClick={() =>setCurrPag(data.characters.info.pages)}>
 							{data.characters.info.pages} </TextoCabecera>
+
 						<TextoCabecera onClick={() => {
-							handleLoadMore();
-							setAddPag(addPag +1)
+							
 						}}>Next</TextoCabecera>
-					</span>: null
+					</PageDiv>: null
 				}
-			{/* </Rotador> */}
+				{/* <PageDiv>
+					<TextoCabecera
+						ver={currPag > 1}
+						onClick={() => setCurrPag(currPag -1)}
+					>Prev</TextoCabecera>
+
+					<TextoCabecera
+						ver={currPag > 1} 
+						onClick={() =>setCurrPag(1)}
+					>1</TextoCabecera>
+
+					{currPag > 2? "..." : ""}
+				</PageDiv>
+
+				<TextoCabecera 
+					ver={true}
+					style={{left: "400px"}}
+				>{currPag}</TextoCabecera>
+
+				<PageDiv>
+					{currPag < data.characters.info.pages -1? "..." : ""}
+
+					<TextoCabecera 
+						ver={currPag < data.characters.info.pages}
+						onClick={() =>setCurrPag(data.characters.info.pages)}
+					>{data.characters.info.pages} </TextoCabecera>
+
+					<TextoCabecera
+						ver={currPag < data.characters.info.pages}
+						onClick={() =>setCurrPag(currPag +1)}
+					>Next</TextoCabecera>
+				</PageDiv> */}
+				</Rotador>
 		</Cabecera>
 			<br/>
 			<br/>
@@ -257,27 +324,6 @@ const Contenedor: FC = () => {
 				</div>
 			))}
 		</ContieneChars>
-
-
-
-		<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/><br/>
-			<br/><br/>
-			<br/>
 	</div>
 };
 
