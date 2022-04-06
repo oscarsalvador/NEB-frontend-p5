@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Contenedor from './components/Contenedor';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { relayStylePagination } from '@apollo/client/utilities';
+
+
 
 const client = new ApolloClient({
   uri: `https://rickandmortyapi.com/graphql`,
@@ -10,7 +13,6 @@ const client = new ApolloClient({
 });
 
 // function client: new ApolloClient(){
-
 
 
 function App() {

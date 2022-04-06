@@ -7,3 +7,6 @@ y anterior. Si no hay sig o ant, no mostrar la flecha
 Al pinchar en un personaje, que abra un modal, los popup de react. Con
 detalles sobre el personaje y una x para cerrar
 de broma, ha pedido que las paginas abajo sean 3d y se muevan
+
+
+mencionar de donde he sacado el codigo para la animacion spin
